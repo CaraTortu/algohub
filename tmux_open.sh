@@ -17,5 +17,5 @@ tmux split-window -v -t algohub
 tmux send-keys -t algohub 'make next-run' C-m
 
 tmux select-window -t algohub:1
-tmux attach -t algohub
+tmux switch -t algohub
 

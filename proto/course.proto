@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "/proto";
+import "google/protobuf/empty.proto";
+
+service CourseService {
+    rpc GetCourses(google.protobuf.Empty) returns (GetCoursesResponse) {}
+    rpc GetCourse(GetCourseRequest) returns (GetCourseResponse) {}
+}
+
+/* Types */
+message Course {
+    message Chapter {
+        message Section {
+            string id = 1;
+            string name = 2;
+            int32 order = 3;
+            string title = 4;
+            string content = 5;
+
+        }
+
+        string id = 1;
+        string name = 2;
+        int32 order = 3;
+        repeated Section sections = 4;
+    }
+
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    repeated Chapter chapters = 4;
+}
+
+/* GetCourses */
+message GetCoursesResponse {
+    message Course {
+        string id = 1;
+        string name = 2;
+        string description = 3;    
+    }
+
+    repeated Course courses = 1;
+}
+
+/* GetCourse */
+message GetCourseRequest {
+    string id = 1;
+}
+
+message GetCourseResponse {
+    bool success = 1;
+    optional string reason = 2;
+    optional Course course = 4;
+}
